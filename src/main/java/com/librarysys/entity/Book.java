@@ -1,5 +1,6 @@
 package com.librarysys.entity;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,13 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Book
 {
     @Id
-    private int bookId;
+    private ObjectId bookId;
     private String author;
     private String title;
     private String status; //free, borrowed
     private String publisher;
     private String libCard; //physical library card number
-    public int getBookId()
+    public ObjectId getBookId()
     {
         return bookId;
     }

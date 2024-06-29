@@ -15,4 +15,9 @@ public class ViewsController
     public String login(){
         return "loginpage.html";
     }
+
+    @RequestMapping("/test")
+    public String test(){
+        return "testpage.html";
+    }
 }
