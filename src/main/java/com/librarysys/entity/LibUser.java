@@ -13,8 +13,13 @@ public abstract class LibUser
     private String password;
     private String name;
     private String surname;
-    private String role;
+    private UserRole role;
 
+    private enum UserRole{
+        CUSTOMER,
+        LIBRARIAN,
+        ADMIN;
+    }
     public ObjectId getUserId()
     {
         return userId;
@@ -60,13 +65,15 @@ public abstract class LibUser
         this.surname = surname;
     }
 
-    public String getRole()
+    public UserRole getRole()
     {
         return role;
     }
 
     public void setRole(String role)
     {
-        this.role = role;
+        if(role.equalsIgnoreCase("customer")) this.role = UserRole.CUSTOMER;
+        else if (role.equalsIgnoreCase("librarian")) this.role = UserRole.LIBRARIAN;
+        else if (role.equalsIgnoreCase("admin")) this.role = UserRole.ADMIN;
     }
 }
