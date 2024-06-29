@@ -12,7 +12,7 @@ public class Book
     private String title;
     private String status; //free, borrowed
     private String publisher;
-
+    private String libCard; //physical library card number
     public int getBookId()
     {
         return bookId;

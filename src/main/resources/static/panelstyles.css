@@ -1,0 +1,137 @@
+:root {
+    --darkred:#FF4D4D;
+    --midred:#FF6A6A;
+    --peach:#FFCCCC;
+    --washedblack:#595959;
+}
+.limit-holder{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+nav{
+    width: 85%;
+}
+.centring-items{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 80%;
+    min-height: 200px;
+}
+.all-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 200px;
+    width: 100%;
+}
+.element{
+    width: 100%;
+    margin-top: 2%;
+}
+#search-bar{
+    width: 100%;
+    height: 5vh;
+    background-color: white;
+    margin-top: 5%;
+}
+#add-new{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 6vh;
+    background-color: var(--darkred);
+    border-radius: 6px;
+    border: none;
+    color: white;
+}
+.grow:hover{
+    transform: scale(1.01);
+}
+#add-new h1, #add-new h2{
+    padding: 2%;
+    font-weight: lighter;
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--washedblack);
+    background-color: var(--midred);
+    height: 10vh;
+    font-size: 1.5rem;
+    border-radius: 6px;
+}
+.item-left{
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    justify-content: space-around;
+}
+.operation-btn{
+    background-color: var(--washedblack);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    height: 4vh;
+    width: 50%;
+    font-size: 1.2rem;
+}
+.operation-btn:hover{
+    transform: scale(1.1);
+}
+.more{
+    border:none;
+    background-color: var(--midred);
+    font-size: 2rem;
+    color: white;
+}
+.more :hover{
+    color: var(--peach);
+}
+#login-container{
+    min-height: 400px;
+}
+#login-container p{
+    font-size: 1rem;
+    padding-right: 60%;
+}
+#login-container h1{
+    font-size: 1.6rem;
+}
+#log-in-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+}
+.input-container{
+    display: flex;
+    justify-content: center;
+    width: 99.9%;
+    height: 18%;
+    background-color: var(--darkred);
+    margin-top: 2%;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    font-size: 1.2rem;
+    
+}
+.input-container:focus{
+    background-color: var(--midred);
+}
+.input-black{
+    width: 100%;
+    height: 23%;
+    margin-top: 5%;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: var(--washedblack);
+    font-size: 1rem;
+}

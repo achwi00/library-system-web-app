@@ -1,0 +1,22 @@
+:root {
+    --darkred:#FF4D4D;
+    --midred:#FF6A6A;
+    --peach:#FFCCCC;
+    --washedblack:#595959;
+}
+#logleft{
+    width: 70%;
+    height: 100%;
+    background-color: var(--peach);
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+}
+#logright{
+    width: 30%;
+    height: 100%;
+    background-color: var(--darkred);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
