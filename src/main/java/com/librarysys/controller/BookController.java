@@ -1,5 +1,6 @@
 package com.librarysys.controller;
 
+import com.librarysys.entity.Book;
 import com.librarysys.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class BookController
     public ResponseEntity<String> createBook(@RequestParam("author") String author,
                                               @RequestParam("title") String title,
                                              @RequestParam("publisher") String publisher){
-        bookService.addBook(title, author, "free", publisher);
+        bookService.addBook(title, author, Book.BookStatus.free, publisher);
         return ResponseEntity.ok("Added a book");
     }
 }

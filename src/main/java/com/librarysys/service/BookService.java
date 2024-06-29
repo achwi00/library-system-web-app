@@ -11,7 +11,7 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    public Book addBook(String title, String author, String status, String publisher) {
+    public Book addBook(String title, String author, Book.BookStatus status, String publisher) {
         Book newBook = new Book();
         newBook.setTitle(title);
         newBook.setAuthor(author);

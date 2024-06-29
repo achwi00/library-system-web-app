@@ -1,5 +1,6 @@
 package com.librarysys.entity;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,14 +8,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public abstract class LibUser
 {
     @Id
-    private int userId;
+    private ObjectId userId;
     private String email;
     private String password;
     private String name;
     private String surname;
     private String role;
 
-    public int getUserId()
+    public ObjectId getUserId()
     {
         return userId;
     }

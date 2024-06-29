@@ -11,9 +11,14 @@ public class Book
     private ObjectId bookId;
     private String author;
     private String title;
-    private String status; //free, borrowed
+    private BookStatus status;
     private String publisher;
     private String libCard; //physical library card number
+
+    public enum BookStatus{
+        free,
+        borrowed;
+    }
     public ObjectId getBookId()
     {
         return bookId;
@@ -39,12 +44,12 @@ public class Book
         this.title = title;
     }
 
-    public String getStatus()
+    public BookStatus getStatus()
     {
         return status;
     }
 
-    public void setStatus(String status)
+    public void setStatus(BookStatus status)
     {
         this.status = status;
     }

@@ -1,5 +1,6 @@
 package com.librarysys.entity;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,35 +11,35 @@ import java.time.LocalDate;
 public class Borrowing
 {
     @Id
-    private int borrowingId;
+    private ObjectId borrowingId;
     @DBRef
-    private int bookId;
+    private ObjectId bookId;
     @DBRef
-    private int userId;
+    private ObjectId userId;
     private LocalDate startTime;
     private LocalDate endTime;
 
-    public int getBorrowingId()
+    public ObjectId getBorrowingId()
     {
         return borrowingId;
     }
 
-    public int getBookId()
+    public ObjectId getBookId()
     {
         return bookId;
     }
 
-    public void setBookId(int bookId)
+    public void setBookId(ObjectId bookId)
     {
         this.bookId = bookId;
     }
 
-    public int getUserId()
+    public ObjectId getUserId()
     {
         return userId;
     }
 
-    public void setUserId(int userId)
+    public void setUserId(ObjectId userId)
     {
         this.userId = userId;
     }
