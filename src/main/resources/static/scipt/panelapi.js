@@ -1,7 +1,10 @@
 let subsite = null;
 
 function general(){
-    if(!subsite || subsite === "catalog") displayCatalog("catalog");
+    if(!subsite || subsite === "catalog") {
+        subsite = "catalog"
+        displayCatalog("catalog");
+    }
     else displayReaders();
     document.getElementById("readers").addEventListener('click', displayReaders);
     document.getElementById("catalog").addEventListener('click', displayCatalog);
@@ -16,7 +19,22 @@ function add(){
     const upperNew = document.getElementById("new-upper");
     addNew.style.minHeight = "17vh";
     upperNew.style.height = "30%";
+    if(subsite === "catalog") addBook();
+    else addUser();
 
+}
+function displayReaders(){
+    subsite = "readers";
+    document.getElementById("add-new").addEventListener('click', add);
+}
+function displayCatalog(){
+    subsite = "catalog";
+    document.getElementById("add-new").addEventListener('click', add);
+}
+function logout(){}
+
+function addBook(){
+    const addNew = document.getElementById("add-new");
     const formsHolder = document.createElement('div');
     formsHolder.classList.add("addForms");
     const addForms = document.createElement('form');
@@ -46,22 +64,6 @@ function add(){
     addForms.appendChild(button);
     formsHolder.appendChild(addForms);
     addNew.appendChild(formsHolder);
-    if(subsite === "readers") addBook();
-    else addUser();
-
-}
-function displayReaders(){
-    subsite = "readers";
-    document.getElementById("add-new").addEventListener('click', add);
-}
-function displayCatalog(catalog){
-    subsite = "catalog";
-    document.getElementById("add-new").addEventListener('click', add);
-}
-function logout(){}
-
-function addBook(){
-
 }
 function addUser(){
 
