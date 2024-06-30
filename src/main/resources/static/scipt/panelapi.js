@@ -39,6 +39,7 @@ function addBook(){
     formsHolder.classList.add("addForms");
     const addForms = document.createElement('form');
     const author = document.createElement('input');
+    addForms.id = "addBookForm";
     addForms.action = "/panel/add-book";
     addForms.method = "post";
     author.type = "text";
@@ -69,6 +70,20 @@ function addBook(){
     addForms.appendChild(button);
     formsHolder.appendChild(addForms);
     addNew.appendChild(formsHolder);
+    addForms.addEventListener('submit', function (e){
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch('/panel/add-book', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                clearContainer(formsHolder)
+                formsHolder.innerText = data;
+            })
+            .catch(error => console.error('Error:', error));
+    });
 }
 function addUser(){
 
