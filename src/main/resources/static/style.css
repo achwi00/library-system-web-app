@@ -39,6 +39,12 @@ nav ul{
     flex-wrap: wrap;
     width: 50%;
 }
+ul button{
+    background-color: var(--peach);
+    border: none;
+    color: black;
+    font-size: 1.1rem;
+}
 ul a{
     color: black;
 }
@@ -48,7 +54,7 @@ li{
 a{
     text-decoration: none;
 }
-a:hover{
+ul button:hover{
     text-decoration: underline;
     color: var(--darkred);
 }

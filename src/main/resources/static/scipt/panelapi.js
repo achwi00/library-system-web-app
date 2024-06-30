@@ -1,6 +1,7 @@
 let subsite = null;
 
 function general(){
+    if(document.cookie)
     console.log("subsite: ", subsite);
     if(!subsite || subsite === "catalog") {
         subsite = "catalog"
@@ -16,6 +17,10 @@ function general(){
 }
 
 function add(){
+    //added
+    const container = document.getElementById("bookFormHolder");
+    if(container != null) container.remove();
+
     const targetContainer = document.getElementById('items-container');
     const addNew = document.getElementById("add-new");
     addNew.removeEventListener('click', add);
@@ -27,11 +32,11 @@ function add(){
 }
 
 function displayReaders(){
-    subsite = readers;
+    subsite = "readers";
     document.getElementById("add-new").addEventListener('click', add);
 }
 function displayCatalog(){
-    subsite = catalog;
+    subsite = "catalog";
     document.getElementById("add-new").addEventListener('click', add);
 }
 function logout(){}
@@ -96,10 +101,11 @@ function addBook(){
     });
 }
 function addUser(){
+
     const addNew = document.getElementById("add-new");
     const formsHolder = document.createElement('div');
     formsHolder.classList.add("addForms");
-    formsHolder.id = "userFormHolder";
+    formsHolder.id = "bookFormHolder";
     const addForms = document.createElement('form');
     const firstRow = document.createElement('div');
     const secondRow = document.createElement('div');
