@@ -181,6 +181,8 @@ nav{
     height: 3vh;
 }
 .btn{
+    padding-inline: 2px;
+    box-sizing: content-box;
     color: white;
     background-color: var(--washedblack);
 }

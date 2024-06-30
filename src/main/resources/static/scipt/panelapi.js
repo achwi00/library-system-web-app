@@ -13,7 +13,7 @@ function general(){
 
 function add(){
     const targetContainer = document.getElementById('items-container');
-    clearContainer(targetContainer);
+    //clearContainer(targetContainer);
     const addNew = document.getElementById("add-new");
     addNew.removeEventListener('click', add);
     const upperNew = document.getElementById("new-upper");
