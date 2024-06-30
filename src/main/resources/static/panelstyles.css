@@ -171,14 +171,14 @@ nav{
     align-items: center;
 }
 .addInput{
-    /*flex: 1;*/
-    width: 25vw;
+    width: 40%;
     background-color: var(--peach);
     border: none;
     outline: none;
     border-radius: 3px;
     margin: 1%;
     font-size: 0.9rem;
+    height: 3vh;
 }
 .btn{
     color: white;
@@ -186,4 +186,10 @@ nav{
 }
 .btn:hover{
     background-color: var(--gray);
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
 }

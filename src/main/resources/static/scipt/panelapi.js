@@ -39,23 +39,27 @@ function addBook(){
     formsHolder.classList.add("addForms");
     const addForms = document.createElement('form');
     const author = document.createElement('input');
+    const firstRow = document.createElement('div');
+    const secondRow = document.createElement('div');
+    firstRow.classList.add("row");
+    secondRow.classList.add("row");
     addForms.id = "addBookForm";
     addForms.action = "/panel/add-book";
     addForms.method = "post";
     author.type = "text";
-    author.required;
+    author.required = true;
     author.placeholder = "Enter author";
     author.classList.add("addInput");
     author.name = "author";
     const title = document.createElement('input');
     title.type = "text";
-    title.required;
+    title.required = true;
     title.placeholder = "Enter title";
     title.classList.add("addInput");
     title.name = "title";
     const publisher = document.createElement('input');
     publisher.type = "text";
-    publisher.required;
+    publisher.required = true;
     publisher.placeholder = "Enter publisher name";
     publisher.classList.add("addInput");
     publisher.name = "publisher";
@@ -64,10 +68,12 @@ function addBook(){
     button.value = "Add";
     button.classList.add("addInput")
     button.classList.add("btn");
-    addForms.appendChild(author);
-    addForms.appendChild(title);
-    addForms.appendChild(publisher);
-    addForms.appendChild(button);
+    firstRow.appendChild(author);
+    firstRow.appendChild(title);
+    addForms.appendChild(firstRow);
+    secondRow.appendChild(publisher);
+    secondRow.appendChild(button);
+    addForms.appendChild(secondRow);
     formsHolder.appendChild(addForms);
     addNew.appendChild(formsHolder);
     addForms.addEventListener('submit', function (e){
