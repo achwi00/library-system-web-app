@@ -101,7 +101,6 @@ function addBook(){
     });
 }
 function addUser(){
-
     const addNew = document.getElementById("add-new");
     const formsHolder = document.createElement('div');
     formsHolder.classList.add("addForms");
