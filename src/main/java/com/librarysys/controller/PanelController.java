@@ -24,9 +24,16 @@ public class PanelController
     @PostMapping("/add-book")
     public String addBook(@RequestParam("author") String author,
                                @RequestParam("title") String title,
-                               @RequestParam("publisher") String publisher,
-                               RedirectAttributes redirectAttributes){
+                               @RequestParam("publisher") String publisher){
         bookService.addBook(title, author, Book.BookStatus.free, publisher);
         return "Book added";
+    }
+
+    @PostMapping("/add-user")
+    public String addUser(@RequestParam("name") String name,
+                          @RequestParam("surname") String surname,
+                          @RequestParam("cardNum") String cardNum){
+        libUserService.addUser(name, surname, "customer", cardNum);
+        return "User added";
     }
 }

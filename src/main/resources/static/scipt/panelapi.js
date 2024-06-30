@@ -1,11 +1,15 @@
 let subsite = null;
 
 function general(){
+    console.log("subsite: ", subsite);
     if(!subsite || subsite === "catalog") {
         subsite = "catalog"
         displayCatalog("catalog");
     }
-    else displayReaders();
+    else {
+        subsite = "readers";
+        displayReaders();
+    }
     document.getElementById("readers").addEventListener('click', displayReaders);
     document.getElementById("catalog").addEventListener('click', displayCatalog);
     document.getElementById("out").addEventListener('click', logout);
@@ -13,7 +17,6 @@ function general(){
 
 function add(){
     const targetContainer = document.getElementById('items-container');
-    //clearContainer(targetContainer);
     const addNew = document.getElementById("add-new");
     addNew.removeEventListener('click', add);
     const upperNew = document.getElementById("new-upper");
@@ -21,14 +24,14 @@ function add(){
     upperNew.style.height = "30%";
     if(subsite === "catalog") addBook();
     else addUser();
-
 }
+
 function displayReaders(){
-    subsite = "readers";
+    subsite = readers;
     document.getElementById("add-new").addEventListener('click', add);
 }
 function displayCatalog(){
-    subsite = "catalog";
+    subsite = catalog;
     document.getElementById("add-new").addEventListener('click', add);
 }
 function logout(){}
@@ -37,8 +40,8 @@ function addBook(){
     const addNew = document.getElementById("add-new");
     const formsHolder = document.createElement('div');
     formsHolder.classList.add("addForms");
+    formsHolder.id = "bookFormHolder";
     const addForms = document.createElement('form');
-    const author = document.createElement('input');
     const firstRow = document.createElement('div');
     const secondRow = document.createElement('div');
     firstRow.classList.add("row");
@@ -46,6 +49,7 @@ function addBook(){
     addForms.id = "addBookForm";
     addForms.action = "/panel/add-book";
     addForms.method = "post";
+    const author = document.createElement('input');
     author.type = "text";
     author.required = true;
     author.placeholder = "Enter author";
@@ -92,6 +96,63 @@ function addBook(){
     });
 }
 function addUser(){
+    const addNew = document.getElementById("add-new");
+    const formsHolder = document.createElement('div');
+    formsHolder.classList.add("addForms");
+    formsHolder.id = "userFormHolder";
+    const addForms = document.createElement('form');
+    const firstRow = document.createElement('div');
+    const secondRow = document.createElement('div');
+    firstRow.classList.add("row");
+    secondRow.classList.add("row");
+    addForms.id = "addUserForm";
+    addForms.action = "/panel/add-user";
+    addForms.method = "post";
+    const nameOfUser = document.createElement('input');
+    nameOfUser.type = "text";
+    nameOfUser.required = true;
+    nameOfUser.placeholder = "Enter name";
+    nameOfUser.classList.add("addInput");
+    nameOfUser.name = "name";
+    const surname = document.createElement('input');
+    surname.type = "text";
+    surname.required = true;
+    surname.placeholder = "Enter surname";
+    surname.classList.add("addInput");
+    surname.name = "title";
+    const cardNum = document.createElement('input');
+    cardNum.type = "text";
+    cardNum.required = true;
+    cardNum.placeholder = "Enter user's library card";
+    cardNum.classList.add("addInput");
+    cardNum.name = "publisher";
+    const button = document.createElement('input');
+    button.type = "submit";
+    button.value = "Add";
+    button.classList.add("addInput")
+    button.classList.add("btn");
+    firstRow.appendChild(nameOfUser);
+    firstRow.appendChild(surname);
+    addForms.appendChild(firstRow);
+    secondRow.appendChild(cardNum);
+    secondRow.appendChild(button);
+    addForms.appendChild(secondRow);
+    formsHolder.appendChild(addForms);
+    addNew.appendChild(formsHolder);
+    addForms.addEventListener('submit', function (e){
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch('/panel/add-user', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => {
+                clearContainer(formsHolder)
+                formsHolder.innerText = data;
+            })
+            .catch(error => console.error('Error:', error));
+    });
 
 }
 function clearContainer(targetContainer)

@@ -26,6 +26,14 @@ public class LibUserService
         libUser.setRole(role);
         return libUserRepository.save(libUser);
     }
+    public LibUser addUser(String name, String surname, String role, String cardNum) {
+        LibUser libUser = new LibUser();
+        libUser.setName(name);
+        libUser.setSurname(surname);
+        libUser.setRole(role);
+        libUser.setCardNumber(cardNum);
+        return libUserRepository.save(libUser);
+    }
     public boolean doesExist(String email, String password){
         return libUserRepository.existsByEmailAndPassword(email, password);
     }

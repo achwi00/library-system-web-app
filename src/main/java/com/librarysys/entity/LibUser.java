@@ -15,12 +15,24 @@ public class LibUser
     private String surname;
     private UserRole role;
     private String sessionKey;
+    private String cardNumber;
 
     private enum UserRole{
         CUSTOMER,
         LIBRARIAN,
         ADMIN;
     }
+
+    public String getCardNumber()
+    {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber)
+    {
+        this.cardNumber = cardNumber;
+    }
+
     public ObjectId getUserId()
     {
         return userId;
