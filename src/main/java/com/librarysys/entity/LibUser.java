@@ -4,8 +4,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public abstract class LibUser
+@Document(collection = "libuser")
+public class LibUser
 {
     @Id
     private ObjectId userId;
@@ -14,6 +14,7 @@ public abstract class LibUser
     private String name;
     private String surname;
     private UserRole role;
+    private String sessionKey;
 
     private enum UserRole{
         CUSTOMER,
@@ -68,6 +69,16 @@ public abstract class LibUser
     public UserRole getRole()
     {
         return role;
+    }
+
+    public String getSessionKey()
+    {
+        return sessionKey;
+    }
+
+    public void setSessionKey(String sessionKey)
+    {
+        this.sessionKey = sessionKey;
     }
 
     public void setRole(String role)
