@@ -72,6 +72,29 @@ function displayCatalog(){
                         upper.style.height = "30%";
                         const bookForm = document.createElement('div');
                         bookForm.classList.add("reservationHolder");
+                        const info = document.createElement('p');
+                        info.textContent = "Provide reader's library card number.";
+                        const reservationForm = document.createElement('form');
+                        reservationForm.classList.add("reservationForm");
+                        const cardNum = document.createElement('input');
+                        cardNum.classList.add("addInput");
+                        cardNum.placeholder = "Library card number";
+                        cardNum.type = "text";
+                        cardNum.required = true;
+                        cardNum.style.margin = "0";
+                        const reservationBtn = document.createElement('input');
+                        reservationBtn.classList.add("operation-btn");
+                        reservationBtn.classList.add("grow");
+                        reservationBtn.type = "submit";
+                        reservationBtn.value = "Book";
+                        reservationBtn.style.height = "3.5vh";
+                        reservationBtn.style.width = "30%";
+
+                        reservationForm.appendChild(cardNum);
+                        reservationForm.appendChild(reservationBtn);
+                        bookForm.appendChild(info);
+                        bookForm.appendChild(reservationForm);
+                        item.appendChild(bookForm);
 
                     })
                 }

@@ -208,4 +208,15 @@ nav{
     display: flex;
     flex-direction: column;
     height: 60%;
+    width: 90%;
+    justify-content: center;
+}
+.reservationHolder p{
+    color: white;
+}
+.reservationForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
