@@ -33,11 +33,74 @@ function add(){
     else addUser();
 }
 
-function displayReaders(){
+function displayReaders() {
     subsite = "readers";
     document.getElementById("add-new").addEventListener('click', add);
     const itemsContainer = document.getElementById("items-container");
     clearContainer(itemsContainer);
+    fetch(`/panel/all-readers`)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(reader =>{
+                const item = document.createElement('div');
+                item.classList.add("item");
+                item.classList.add("element");
+                const upper = document.createElement('div');
+                upper.classList.add("upper-item");
+                const itemLeft = document.createElement('div');
+                const itemRight = document.createElement('div');
+                itemLeft.classList.add("item-left");
+                itemRight.classList.add("item-left");
+                const pName = document.createElement('p');
+                const pSurname = document.createElement('p');
+                const pCard = document.createElement('p');
+                const bookBtn = document.createElement('button');
+                bookBtn.classList.add("operation-btn");
+                bookBtn.classList.add("grow");
+                bookBtn.textContent = "Delete";
+
+                bookBtn.addEventListener('click', function (e){
+                    e.preventDefault();
+                    const formData = new FormData();
+                    formData.append('cardNum',`${reader.cardNumber}`);
+                    fetch('/panel/all-readers/delete', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            bookBtn.disabled = true;
+                            bookBtn.style.backgroundColor = "var(--peach)";
+                            bookBtn.style.color = "var(--washedblack)";
+                            bookBtn.innerText = data;
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+
+                const arrowHolder = document.createElement('button');
+                arrowHolder.classList.add("more");
+                arrowHolder.classList.add("grow")
+                const arrow = document.createElement('i');
+                arrow.classList.add("bi");
+                arrow.classList.add("bi-plus");
+
+                arrowHolder.appendChild(arrow);
+                itemRight.appendChild(bookBtn);
+                itemRight.appendChild(arrowHolder);
+                pName.textContent = `${reader.name}`;
+                pSurname.textContent = `${reader.surname}`;
+                pCard.textContent = `${reader.cardNumber}`
+                itemLeft.appendChild(pName);
+                itemLeft.appendChild(pSurname);
+                itemLeft.appendChild(pCard);
+
+                upper.appendChild(itemLeft);
+                upper.appendChild(itemRight);
+                item.appendChild(upper);
+                itemsContainer.appendChild(item);
+
+            })
+        })
 
 }
 function displayCatalog(){
@@ -64,7 +127,6 @@ function displayCatalog(){
                 bookBtn.classList.add("operation-btn");
                 bookBtn.classList.add("grow");
 
-                console.log(`${book.status}` , typeof `${book.status}`);
 
                 if(`${book.status}`=== 'free'){
                     bookBtn.textContent = "Book";
@@ -97,7 +159,7 @@ function displayCatalog(){
                         bookForm.appendChild(info);
                         bookForm.appendChild(reservationForm);
                         item.appendChild(bookForm);
-                        //start
+
                         bookForm.addEventListener('submit', function (e){
                             e.preventDefault();
                             const formData = new FormData();
@@ -116,7 +178,6 @@ function displayCatalog(){
                                 .catch(error => console.error('Error:', error));
                         });
 
-                        //end
 
                     })
                 }
@@ -250,13 +311,13 @@ function addUser(){
     surname.required = true;
     surname.placeholder = "Enter surname";
     surname.classList.add("addInput");
-    surname.name = "title";
+    surname.name = "surname";
     const cardNum = document.createElement('input');
     cardNum.type = "text";
     cardNum.required = true;
     cardNum.placeholder = "Enter user's library card";
     cardNum.classList.add("addInput");
-    cardNum.name = "publisher";
+    cardNum.name = "cardNum";
     const button = document.createElement('input');
     button.type = "submit";
     button.value = "Add";

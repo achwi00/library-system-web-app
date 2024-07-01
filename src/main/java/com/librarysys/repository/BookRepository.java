@@ -17,4 +17,5 @@ public interface BookRepository extends MongoRepository<Book, String>
 
     boolean existsByBookCopyId(String bookCopyId);
 
+
 }

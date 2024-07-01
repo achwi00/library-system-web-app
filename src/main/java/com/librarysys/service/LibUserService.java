@@ -11,6 +11,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LibUserService
 {
@@ -63,5 +65,15 @@ public class LibUserService
     public ObjectId findIdBySessionKey(String sessionKey){
         LibUser libUser = libUserRepository.findBySessionKey(sessionKey);
         return libUser.getUserId();
+    }
+
+    public List<LibUser> getAllReaders(){
+        List<LibUser> users = libUserRepository.findAllByRole(LibUser.UserRole.CUSTOMER);
+        if(users.get(0) != null) return users;
+        else return null;
+    }
+
+    public void deleteUserByCard(String cardNumber){
+        libUserRepository.deleteLibUserByCardNumber(cardNumber);
     }
 }

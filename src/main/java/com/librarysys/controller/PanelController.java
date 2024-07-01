@@ -3,6 +3,7 @@ package com.librarysys.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.librarysys.entity.Book;
+import com.librarysys.entity.LibUser;
 import com.librarysys.service.BookService;
 import com.librarysys.service.BorrowingService;
 import com.librarysys.service.LibUserService;
@@ -49,6 +50,11 @@ public class PanelController
         List<Book> books = bookService.getAllBooks();
         return books;
     }
+    @GetMapping("/all-readers")
+    public List<LibUser> getAllReaders()
+    {
+        return libUserService.getAllReaders();
+    }
 
     @PostMapping("/all-books/borrowing")
     public String createBorrowing(@RequestParam("cardNum") String cardNum,
@@ -79,4 +85,12 @@ public class PanelController
         borrowingService.endBorrowing(bookId, userId);
         return "Returned";
     }
+
+    @PostMapping("/all-readers/delete")
+    public String returnBook(@RequestParam("cardNum") String cardNumber)
+    {
+        libUserService.deleteUserByCard(cardNumber);
+        return "Deleted";
+    }
+
 }

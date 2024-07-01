@@ -17,7 +17,7 @@ public class LibUser
     private String sessionKey;
     private String cardNumber;
 
-    private enum UserRole{
+    public enum UserRole{
         CUSTOMER,
         LIBRARIAN,
         ADMIN;
