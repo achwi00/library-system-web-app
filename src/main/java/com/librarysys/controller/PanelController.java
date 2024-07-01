@@ -68,4 +68,15 @@ public class PanelController
         }
         return "Invalid card number." ;
     }
+
+    @PostMapping("/all-books/return-book")
+    public String returnBook(@RequestParam("bookCopyId") String bookCopyId,
+                             @RequestParam String sessionKey)
+    {
+        bookService.updateStatus(bookCopyId, "free");
+        ObjectId bookId = bookService.findBookByBookCopyId(bookCopyId);
+        ObjectId userId = libUserService.findIdBySessionKey(sessionKey);
+        borrowingService.endBorrowing(bookId, userId);
+        return "Returned";
+    }
 }

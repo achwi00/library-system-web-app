@@ -59,4 +59,9 @@ public class LibUserService
         libUser.setSessionKey(sessionKey);
         libUserRepository.save(libUser);
     }
+
+    public ObjectId findIdBySessionKey(String sessionKey){
+        LibUser libUser = libUserRepository.findBySessionKey(sessionKey);
+        return libUser.getUserId();
+    }
 }

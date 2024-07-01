@@ -1,5 +1,6 @@
 package com.librarysys.service;
 
+import com.librarysys.entity.Book;
 import com.librarysys.entity.Borrowing;
 import com.librarysys.entity.LibUser;
 import com.librarysys.repository.BorrowingRepository;
@@ -23,5 +24,14 @@ public class BorrowingService
         borrowing.setStartTime(LocalDate.now());
         System.out.println("UserId: for borrowing " + borrowing.getUserId());
         return borrowingRepository.save(borrowing);
+    }
+
+    public Borrowing endBorrowing(ObjectId bookId, ObjectId userId){
+        Borrowing borrowing = borrowingRepository.findByUserIdAndBookIdAndEndTime(userId, bookId, null);
+        if(borrowing != null){
+            borrowing.setEndTime(LocalDate.now());
+            return borrowingRepository.save(borrowing);
+        }
+        else return null;
     }
 }

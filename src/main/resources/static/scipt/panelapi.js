@@ -1,4 +1,6 @@
 let subsite = null;
+const urlParams1 = new URLSearchParams(window.location.search);
+const sessionKey = urlParams1.get('sessionKey');
 
 function general(){
     if(document.cookie)
@@ -120,6 +122,25 @@ function displayCatalog(){
                 }
                 else {
                     bookBtn.textContent = "Return";
+
+                    bookBtn.addEventListener('click', function (e){
+                        e.preventDefault();
+                        const formData = new FormData();
+                        formData.append('bookCopyId', `${book.bookCopyId}`);
+                        formData.append('sessionKey', sessionKey);
+                        fetch('/panel/all-books/return-book', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                bookBtn.disabled = true;
+                                bookBtn.style.backgroundColor = "var(--peach)";
+                                bookBtn.style.color = "var(--washedblack)";
+                                bookBtn.innerText = data;
+                            })
+                            .catch(error => console.error('Error:', error));
+                    });
 
                 }
                 const arrowHolder = document.createElement('button');
