@@ -36,4 +36,5 @@ public class BookController
         libUserService.addUser(email, password, name, surname, "librarian");
         return ResponseEntity.ok("Added a user");
     }
+
 }

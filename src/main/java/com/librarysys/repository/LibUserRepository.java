@@ -16,4 +16,6 @@ public interface LibUserRepository extends MongoRepository<LibUser, String>
 
     LibUser findBySessionKey(String sessionKey);
     LibUser findByUserId(ObjectId userId);
+
+    LibUser findByCardNumber(String cardnumber);
 }

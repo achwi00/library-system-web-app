@@ -44,6 +44,12 @@ public class LibUserService
         else throw new RuntimeException("User not found!");
     }
 
+    public ObjectId findUserByCard(String cardNum){
+        LibUser libUser = libUserRepository.findByCardNumber(cardNum);
+        if(libUser != null) return libUser.getUserId();
+        else throw new RuntimeException("User not found!");
+    }
+
     public boolean existsBySessionKey(String sessionKey){
         return libUserRepository.existsBySessionKey(sessionKey);
     }

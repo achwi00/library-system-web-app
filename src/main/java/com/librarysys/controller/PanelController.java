@@ -1,8 +1,12 @@
 package com.librarysys.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.librarysys.entity.Book;
 import com.librarysys.service.BookService;
+import com.librarysys.service.BorrowingService;
 import com.librarysys.service.LibUserService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,6 +23,9 @@ public class PanelController
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private BorrowingService borrowingService;
 
     @PostMapping("/add-book")
     public String addBook(@RequestParam("author") String author,
@@ -41,5 +48,24 @@ public class PanelController
     {
         List<Book> books = bookService.getAllBooks();
         return books;
+    }
+
+    @PostMapping("/all-books/borrowing")
+    public String createBorrowing(@RequestParam("cardNum") String cardNum,
+                                  @RequestParam("bookId") String bookCopyId)
+    {
+        System.out.println("bookCopyId: " + bookCopyId);
+        //create a new borrowing
+        ObjectId userId = libUserService.findUserByCard(cardNum);
+        System.out.println("Found the user: " + userId);
+        ObjectId bookId = bookService.findBookByBookCopyId(bookCopyId);
+        System.out.println("found the book: " + bookId);
+        if(userId != null){
+            borrowingService.createBorrowing(bookId, userId);
+            //change the book status
+            bookService.updateStatus(bookCopyId, "borrowed");
+            return "A booking was made.";
+        }
+        return "Invalid card number." ;
     }
 }

@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 
@@ -12,9 +13,9 @@ public class Borrowing
 {
     @Id
     private ObjectId borrowingId;
-    @DBRef
+    @Field("bookId")
     private ObjectId bookId;
-    @DBRef
+    @Field("userId")
     private ObjectId userId;
     private LocalDate startTime;
     private LocalDate endTime;

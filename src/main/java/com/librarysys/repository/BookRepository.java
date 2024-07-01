@@ -10,4 +10,11 @@ public interface BookRepository extends MongoRepository<Book, String>
     Book save(Book book);
 
     List<Book> findAll();
+
+    Book findByBookId();
+
+    Book findByBookCopyId(String bookCopyId);
+
+    boolean existsByBookCopyId(String bookCopyId);
+
 }

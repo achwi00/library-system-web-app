@@ -82,6 +82,7 @@ function displayCatalog(){
                         cardNum.type = "text";
                         cardNum.required = true;
                         cardNum.style.margin = "0";
+                        cardNum.name = "cardNum";
                         const reservationBtn = document.createElement('input');
                         reservationBtn.classList.add("operation-btn");
                         reservationBtn.classList.add("grow");
@@ -89,12 +90,31 @@ function displayCatalog(){
                         reservationBtn.value = "Book";
                         reservationBtn.style.height = "3.5vh";
                         reservationBtn.style.width = "30%";
-
                         reservationForm.appendChild(cardNum);
                         reservationForm.appendChild(reservationBtn);
                         bookForm.appendChild(info);
                         bookForm.appendChild(reservationForm);
                         item.appendChild(bookForm);
+                        //start
+                        bookForm.addEventListener('submit', function (e){
+                            e.preventDefault();
+                            const formData = new FormData();
+                            formData.append('cardNum',cardNum.value);
+                            //formData.append('bookId', String(`${book.id}`));
+                            formData.append('bookId', `${book.bookCopyId}`);
+                            fetch('/panel/all-books/borrowing', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => response.text())
+                                .then(data => {
+                                    clearContainer(bookForm)
+                                    bookForm.innerText = data;
+                                })
+                                .catch(error => console.error('Error:', error));
+                        });
+
+                        //end
 
                     })
                 }
