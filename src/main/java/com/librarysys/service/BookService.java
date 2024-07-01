@@ -5,6 +5,8 @@ import com.librarysys.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookService {
 
@@ -18,5 +20,11 @@ public class BookService {
         newBook.setStatus(status);
         newBook.setPublisher(publisher);
         return bookRepository.save(newBook);
+    }
+
+    public List<Book> getAllBooks(){
+        List<Book> books = bookRepository.findAll();
+        if (books.isEmpty()) return null;
+        else return books;
     }
 }

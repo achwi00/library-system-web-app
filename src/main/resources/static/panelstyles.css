@@ -68,15 +68,24 @@ nav{
     font-size: 1.2rem;
 }
 .item{
-    display: flex;
+    /*display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between;*/
+    display: flex;
+    flex-direction: column;
     align-items: center;
     color: var(--washedblack);
     background-color: var(--midred);
     height: 8vh;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     border-radius: 6px;
+}
+.upper-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
 }
 .item-left{
     display: flex;
@@ -194,4 +203,9 @@ nav{
     flex-direction: row;
     justify-content: space-between;
     width: 80%;
+}
+.reservationHolder{
+    display: flex;
+    flex-direction: column;
+    height: 60%;
 }

@@ -4,12 +4,11 @@ import com.librarysys.entity.Book;
 import com.librarysys.service.BookService;
 import com.librarysys.service.LibUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/panel")
@@ -35,5 +34,12 @@ public class PanelController
                           @RequestParam("cardNum") String cardNum){
         libUserService.addUser(name, surname, "customer", cardNum);
         return "User added";
+    }
+
+    @GetMapping("/all-books")
+    public List<Book> getAllBooks()
+    {
+        List<Book> books = bookService.getAllBooks();
+        return books;
     }
 }
