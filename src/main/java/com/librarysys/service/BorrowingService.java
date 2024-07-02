@@ -2,13 +2,16 @@ package com.librarysys.service;
 
 import com.librarysys.entity.Book;
 import com.librarysys.entity.Borrowing;
+import com.librarysys.entity.DetailedBorrowing;
 import com.librarysys.entity.LibUser;
+import com.librarysys.repository.BookRepository;
 import com.librarysys.repository.BorrowingRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +20,9 @@ public class BorrowingService
 {
     @Autowired
     private BorrowingRepository borrowingRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     public Borrowing createBorrowing(ObjectId bookId, ObjectId userId) {
 
@@ -41,8 +47,14 @@ public class BorrowingService
         borrowingRepository.deleteAllByBookId(bookId);
     }
 
-    public List<Borrowing> findAllCurrentUserBorrowings(ObjectId userId){
-        return borrowingRepository.findAllByUserIdAndEndTime(userId, null);
+    public List<DetailedBorrowing> findAllCurrentUserBorrowings(ObjectId userId){
+        List<Borrowing> borrowingsClear = borrowingRepository.findAllByUserIdAndEndTime(userId, null);
+        List<DetailedBorrowing> detailedBorrowings = new LinkedList<>();
+        for(Borrowing borrowing : borrowingsClear){
+            DetailedBorrowing detailedBorrowing = new DetailedBorrowing(borrowing, bookRepository.findByBookId(borrowing.getBookId()));
+            detailedBorrowings.add(detailedBorrowing);
+        }
+        return detailedBorrowings;
     }
 
     public List<Borrowing> findAllPreviousUserBorrowings(ObjectId userId){

@@ -87,16 +87,22 @@ function displayReaders() {
 
                 function userDetails(){
                    clearContainer(itemsContainer);
+                   const bookFormHolder = document.getElementById("bookFormHolder");
+                   //append the bookFormHolder
                    const addNew = document.getElementById("add-new");
                    addNew.removeEventListener('click', add);
                    const upperNew = document.getElementById("new-upper");
-                   addNew.style.minHeight = "17vh";
+                   clearContainer(upperNew);
+                   addNew.style.minHeight = "19vh";
                    upperNew.style.height = "30%";
                    clearContainer(upperNew);
                    const pName = document.createElement('h2');
                    pName.textContent = `${reader.name} ${reader.surname}, Library card: ${reader.cardNumber}`;
                    upperNew.appendChild(pName);
                    addNew.appendChild(upperNew);
+                   const info = document.createElement('p');
+                   info.innerText = "Current borrowings: ";
+                   addNew.appendChild(info);
 
                     const formData = new FormData();
                     formData.append('cardNumber', `${reader.cardNumber}`);
@@ -106,11 +112,12 @@ function displayReaders() {
                     })
                         .then(response => response.json())
                         .then(data => {
-                            data.forEach(borrowing => {
+                            data.forEach(b => {
                             const booking = document.createElement('p');
                             booking.style.margin = "0";
-                            console.log(`${borrowing.startTime}`);
-                            booking.innerText = `${borrowing.startTime}`;
+                            console.log(`${b.startTime}`);
+                            booking.innerText = `${b.borrowing.startTime} ${b.book.author} ${b.book.bookCopyId}`;
+
                             addNew.appendChild(booking);
                         })
                         })
