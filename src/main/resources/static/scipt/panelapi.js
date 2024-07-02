@@ -88,7 +88,8 @@ function displayReaders() {
                 arrow.addEventListener('click', userDetails);
 
                 function userDetails(){
-                   clearContainer(itemsContainer);
+                    toDefaultView(); //--**
+                   //clearContainer(itemsContainer);
                    const bookFormHolder = document.getElementById("bookFormHolder");
                    //append the bookFormHolder
                    const addNew = document.getElementById("add-new");
@@ -300,10 +301,12 @@ function displayReaders() {
                 arrow.addEventListener('click', bookDetails);
 
                 function bookDetails(){
-                    //need correction
-                    // while(!item.firstChild.classList.contains("upper-item")){
-                    //     item.firstChild.remove();
-                    // }
+                    const unwantedholderchilds = item.childNodes;
+                    unwantedholderchilds.forEach((child)=>{
+                        if(child.className === 'reservationHolder'){
+                            child.remove();
+                        }
+                    })
                     arrow.removeEventListener('click', bookDetails);
                     bookBtn.style.visibility = "hidden";
                     item.style.height = "20vh";
@@ -502,7 +505,7 @@ function toDefaultView(){
     const addNew = document.getElementById("add-new");
     addNew.style.minHeight = "6vh";
     const upper = document.getElementById("new-upper");
-    upper.height = "100%";
+    upper.style.height = "100%";
     clearContainer(upper);
     const bookFormHolder = document.getElementById("bookFormHolder");
     if(bookFormHolder != null) bookFormHolder.remove();
