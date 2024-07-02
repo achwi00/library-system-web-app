@@ -74,4 +74,8 @@ public class BookService {
         System.out.println("Generated bookCopyId: " + generatedString);
         return generatedString;
     }
+
+    public void deleteBook(String bookCopyId){
+        bookRepository.deleteBookByBookCopyId(bookCopyId);
+    }
 }

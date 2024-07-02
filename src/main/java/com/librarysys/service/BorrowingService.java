@@ -34,4 +34,8 @@ public class BorrowingService
         }
         else return null;
     }
+
+    public void deleteAllByBook(ObjectId bookId){
+        borrowingRepository.deleteAllByBookId(bookId);
+    }
 }

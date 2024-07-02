@@ -216,6 +216,50 @@ function displayCatalog(){
                 arrow.classList.add("bi");
                 arrow.classList.add("bi-chevron-down");
 
+                arrow.addEventListener('click', bookDetails);
+
+                function bookDetails(){
+                    //need correction
+                    // while(!item.firstChild.classList.contains("upper-item")){
+                    //     item.firstChild.remove();
+                    // }
+                    arrow.removeEventListener('click', bookDetails);
+                    bookBtn.style.visibility = "hidden";
+                    item.style.height = "20vh";
+                    upper.style.height = "30%";
+                    const bookForm = document.createElement('div');
+                    bookForm.classList.add("reservationHolder");
+                    const bookCopy = document.createElement('p');
+                    bookCopy.textContent = `Book's id: ${book.bookCopyId}`;
+                    const bookDeleteBtn = document.createElement('button');
+                    bookDeleteBtn.classList.add("operation-btn");
+                    bookDeleteBtn.classList.add("grow");
+                    bookDeleteBtn.innerText = "Delete";
+
+                    bookDeleteBtn.addEventListener('click', function (){
+
+                        const removeBookForm = new FormData();
+                        removeBookForm.append('bookCopyId', `${book.bookCopyId}`);
+
+                        fetch('/panel/all-books/delete-book', {
+                            method: 'POST',
+                            body: removeBookForm
+                        })
+                            .then(response => response.text())
+                            .then(data => {
+                                bookDeleteBtn.disabled = true;
+                                bookDeleteBtn.style.backgroundColor = "var(--peach)";
+                                bookDeleteBtn.style.color = "var(--washedblack)";
+                                bookDeleteBtn.innerText = data;
+                            })
+                            .catch(error => console.error('Error:', error));
+
+                    })
+                    bookForm.appendChild(bookCopy);
+                    bookForm.appendChild(bookDeleteBtn);
+                    item.appendChild(bookForm);
+                }
+
                 arrowHolder.appendChild(arrow);
                 itemRight.appendChild(bookBtn);
                 itemRight.appendChild(arrowHolder);

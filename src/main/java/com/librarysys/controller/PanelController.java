@@ -93,4 +93,11 @@ public class PanelController
         return "Deleted";
     }
 
+    @PostMapping("/all-books/delete-book")
+    public String deleteBook(@RequestParam("bookCopyId") String bookCopyId){
+        ObjectId bookId = bookService.findBookByBookCopyId(bookCopyId);
+        bookService.deleteBook(bookCopyId);
+        borrowingService.deleteAllByBook(bookId);
+        return "Deleted";
+    }
 }
