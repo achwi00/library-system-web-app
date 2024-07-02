@@ -19,5 +19,6 @@ public interface BorrowingRepository extends MongoRepository<Borrowing, String>
     void deleteAllByBookId(ObjectId bookId);
 
     List<Borrowing> findAllByUserIdAndEndTime(ObjectId userId, LocalDate endTime);
+    Borrowing findByBookIdAndStatus(ObjectId bookId, Borrowing.BorrowingStatus status);
 
 }

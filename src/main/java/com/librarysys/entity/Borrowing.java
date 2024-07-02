@@ -18,7 +18,24 @@ public class Borrowing
     @Field("userId")
     private ObjectId userId;
     private LocalDate startTime;
+    @Field("endTime")
     private LocalDate endTime;
+    private BorrowingStatus status;
+
+    public enum BorrowingStatus{
+        FINISHED,
+        ONGOING
+    }
+
+    public BorrowingStatus getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(BorrowingStatus status)
+    {
+        this.status = status;
+    }
 
     public ObjectId getBorrowingId()
     {

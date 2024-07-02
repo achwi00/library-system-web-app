@@ -107,4 +107,10 @@ public class PanelController
         ObjectId userId = libUserService.findUserByCard(cardNumber);
         return borrowingService.findAllCurrentUserBorrowings(userId);
     }
+    @PostMapping("/all-readers/history")
+    public List<DetailedBorrowing> borrowingHistory(@RequestParam("cardNumber") String cardNumber){
+        ObjectId userId = libUserService.findUserByCard(cardNumber);
+        return borrowingService.findBorrowingHistory(userId);
+    }
+
 }

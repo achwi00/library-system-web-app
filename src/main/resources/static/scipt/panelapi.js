@@ -124,6 +124,43 @@ function displayReaders() {
                         .catch(error => console.error('Error:', error));
 
 
+                    //fetch the user history, create item for each
+                    const cardForm = new FormData();
+                    cardForm.append('cardNumber', `${reader.cardNumber}`);
+                    fetch('/panel/all-readers/history', {
+                        method: 'POST',
+                        body: cardForm
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(entry => {
+                                const item = document.createElement('div');
+                                item.classList.add("item");
+                                item.classList.add("element");
+                                const upper = document.createElement('div');
+                                upper.classList.add("upper-item");
+                                const itemLeft = document.createElement('div');
+                                const itemRight = document.createElement('div');
+                                itemLeft.classList.add("item-left");
+                                itemRight.classList.add("item-left");
+                                const time = document.createElement('p');
+                                const author = document.createElement('p');
+                                const bookCopy = document.createElement('p');
+                                time.innerText = `${entry.borrowing.startTime} - ${entry.borrowing.endTime}`;
+                                author.innerText = `${entry.book.author}`;
+                                bookCopy.innerText = `${entry.book.bookCopyId}`;
+                                itemLeft.appendChild(time);
+                                itemLeft.appendChild(author);
+                                itemRight.appendChild(bookCopy);
+
+                                upper.appendChild(itemLeft);
+                                upper.appendChild(itemRight);
+                                item.appendChild(upper);
+                                itemsContainer.appendChild(item);
+                            })
+                        })
+
+                    //end
                 }
 
                 arrowHolder.appendChild(arrow);
