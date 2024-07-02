@@ -63,15 +63,10 @@ public class PanelController
     public String createBorrowing(@RequestParam("cardNum") String cardNum,
                                   @RequestParam("bookId") String bookCopyId)
     {
-        System.out.println("bookCopyId: " + bookCopyId);
-        //create a new borrowing
         ObjectId userId = libUserService.findUserByCard(cardNum);
-        System.out.println("Found the user: " + userId);
         ObjectId bookId = bookService.findBookByBookCopyId(bookCopyId);
-        System.out.println("found the book: " + bookId);
         if(userId != null){
             borrowingService.createBorrowing(bookId, userId);
-            //change the book status
             bookService.updateStatus(bookCopyId, "borrowed");
             return "A booking was made.";
         }
@@ -115,9 +110,7 @@ public class PanelController
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@RequestParam String sessionKey){
         ObjectId userId = libUserService.findIdBySessionKey(sessionKey);
-        //change the sessionKey to null
         libUserService.updateSessionKey(userId, null);
-        //return ok
         return ResponseEntity.ok().build();
     }
 }

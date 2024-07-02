@@ -33,10 +33,12 @@ function add(){
 }
 
 function displayReaders() {
+    toDefaultView();
     subsite = "readers";
     document.getElementById("add-new").addEventListener('click', add);
     const itemsContainer = document.getElementById("items-container");
     clearContainer(itemsContainer);
+
     fetch(`/panel/all-readers`)
         .then(response => response.json())
         .then(data => {
@@ -182,11 +184,12 @@ function displayReaders() {
         })
 
 }
-function displayCatalog(){
+ function displayCatalog(){
+    toDefaultView();
     subsite = "catalog";
     document.getElementById("add-new").addEventListener('click', add);
     const itemsContainer = document.getElementById("items-container");
-    clearContainer(itemsContainer);
+
     fetch(`/panel/all-books`)
         .then(response => response.json())
         .then(data => {
@@ -490,5 +493,29 @@ function clearContainer(targetContainer)
 {
     while(targetContainer.firstChild){
         targetContainer.firstChild.remove();
+    }
+}
+
+function toDefaultView(){
+    const itemsContainer = document.getElementById("items-container");
+    clearContainer(itemsContainer);
+    const addNew = document.getElementById("add-new");
+    addNew.style.minHeight = "6vh";
+    const upper = document.getElementById("new-upper");
+    upper.height = "100%";
+    clearContainer(upper);
+    const bookFormHolder = document.getElementById("bookFormHolder");
+    if(bookFormHolder != null) bookFormHolder.remove();
+
+    const pAddNew = document.createElement('h2');
+    const more = document.createElement('h1');
+    pAddNew.textContent = "Add new";
+    more.textContent = "+";
+    upper.appendChild(pAddNew);
+    upper.appendChild(more);
+
+    const readerName = document.querySelector("#add-new > p");
+    if(readerName){
+        readerName.remove();
     }
 }
