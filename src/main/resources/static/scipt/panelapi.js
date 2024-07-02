@@ -326,8 +326,8 @@ function displayCatalog(){
                             .then(response => response.text())
                             .then(data => {
                                 bookDeleteBtn.disabled = true;
-                                bookDeleteBtn.style.backgroundColor = "var(--peach)";
-                                bookDeleteBtn.style.color = "var(--washedblack)";
+                                bookBtn.style.backgroundColor = "var(--peach)";
+                                bookBtn.style.color = "var(--washedblack)";
                                 bookDeleteBtn.innerText = data;
                             })
                             .catch(error => console.error('Error:', error));

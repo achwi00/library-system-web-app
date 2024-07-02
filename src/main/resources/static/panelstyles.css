@@ -142,11 +142,15 @@ nav{
     border-radius: 5px;
     border: 0;
     outline: none;
-    font-size: 1.2rem;
-    
+    font-size: 1.1rem;
 }
 .input-container:focus{
     background-color: var(--midred);
+}
+.input-container::placeholder{
+    color: var(--peach);
+    font-size: 0.9rem;
+    padding-left: 2%
 }
 .input-black{
     width: 100%;
@@ -223,5 +227,9 @@ nav{
 .bookCopyP{
     margin: 0;
     font-size: 0.6rem;
+    color: var(--washedblack);
+}
+.disabledBtn{
+    background-color: var(--peach);
     color: var(--washedblack);
 }
