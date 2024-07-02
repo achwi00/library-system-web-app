@@ -138,6 +138,10 @@ function displayCatalog(){
                         bookForm.classList.add("reservationHolder");
                         const info = document.createElement('p');
                         info.textContent = "Provide reader's library card number.";
+                        const bookCopy = document.createElement('p');
+                        bookCopy.textContent = `Book's id: ${book.bookCopyId}`;
+                        bookCopy.classList.add("bookCopyP");
+                        bookCopy.style.color = "var(--washedblack)";
                         const reservationForm = document.createElement('form');
                         reservationForm.classList.add("reservationForm");
                         const cardNum = document.createElement('input');
@@ -156,6 +160,7 @@ function displayCatalog(){
                         reservationBtn.style.width = "30%";
                         reservationForm.appendChild(cardNum);
                         reservationForm.appendChild(reservationBtn);
+                        bookForm.appendChild(bookCopy);
                         bookForm.appendChild(info);
                         bookForm.appendChild(reservationForm);
                         item.appendChild(bookForm);
