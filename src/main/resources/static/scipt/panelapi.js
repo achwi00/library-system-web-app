@@ -23,7 +23,6 @@ function add(){
     const container = document.getElementById("bookFormHolder");
     if(container != null) container.remove();
 
-    const targetContainer = document.getElementById('items-container');
     const addNew = document.getElementById("add-new");
     addNew.removeEventListener('click', add);
     const upperNew = document.getElementById("new-upper");
@@ -83,6 +82,42 @@ function displayReaders() {
                 const arrow = document.createElement('i');
                 arrow.classList.add("bi");
                 arrow.classList.add("bi-plus");
+
+                arrow.addEventListener('click', userDetails);
+
+                function userDetails(){
+                   clearContainer(itemsContainer);
+                   const addNew = document.getElementById("add-new");
+                   addNew.removeEventListener('click', add);
+                   const upperNew = document.getElementById("new-upper");
+                   addNew.style.minHeight = "17vh";
+                   upperNew.style.height = "30%";
+                   clearContainer(upperNew);
+                   const pName = document.createElement('h2');
+                   pName.textContent = `${reader.name} ${reader.surname}, Library card: ${reader.cardNumber}`;
+                   upperNew.appendChild(pName);
+                   addNew.appendChild(upperNew);
+
+                    const formData = new FormData();
+                    formData.append('cardNumber', `${reader.cardNumber}`);
+                    fetch('/panel/all-readers/current-borrow', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(borrowing => {
+                            const booking = document.createElement('p');
+                            booking.style.margin = "0";
+                            console.log(`${borrowing.startTime}`);
+                            booking.innerText = `${borrowing.startTime}`;
+                            addNew.appendChild(booking);
+                        })
+                        })
+                        .catch(error => console.error('Error:', error));
+
+
+                }
 
                 arrowHolder.appendChild(arrow);
                 itemRight.appendChild(bookBtn);
