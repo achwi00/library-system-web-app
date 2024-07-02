@@ -11,6 +11,7 @@ import com.librarysys.service.BorrowingService;
 import com.librarysys.service.LibUserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -111,4 +112,12 @@ public class PanelController
         return borrowingService.findBorrowingHistory(userId);
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@RequestParam String sessionKey){
+        ObjectId userId = libUserService.findIdBySessionKey(sessionKey);
+        //change the sessionKey to null
+        libUserService.updateSessionKey(userId, null);
+        //return ok
+        return ResponseEntity.ok().build();
+    }
 }
