@@ -78,18 +78,16 @@ public class PanelController
     }
 
     @PostMapping("/all-books/return-book")
-    public String returnBook(@RequestParam("bookCopyId") String bookCopyId,
-                             @RequestParam String sessionKey)
+    public String returnBook(@RequestParam("bookCopyId") String bookCopyId)
     {
         bookService.updateStatus(bookCopyId, "free");
         ObjectId bookId = bookService.findBookByBookCopyId(bookCopyId);
-        ObjectId userId = libUserService.findIdBySessionKey(sessionKey);
-        borrowingService.endBorrowing(bookId, userId);
+        borrowingService.endBorrowing(bookId);
         return "Returned";
     }
 
     @PostMapping("/all-readers/delete")
-    public String returnBook(@RequestParam("cardNum") String cardNumber)
+    public String deleteUser(@RequestParam("cardNum") String cardNumber)
     {
         libUserService.deleteUserByCard(cardNumber);
         return "Deleted";

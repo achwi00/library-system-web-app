@@ -272,7 +272,6 @@ function displayCatalog(){
                         e.preventDefault();
                         const formData = new FormData();
                         formData.append('bookCopyId', `${book.bookCopyId}`);
-                        formData.append('sessionKey', sessionKey);
                         fetch('/panel/all-books/return-book', {
                             method: 'POST',
                             body: formData

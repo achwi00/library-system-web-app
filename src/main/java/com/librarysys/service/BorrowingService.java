@@ -35,7 +35,7 @@ public class BorrowingService
         return borrowingRepository.save(borrowing);
     }
 
-    public Borrowing endBorrowing(ObjectId bookId, ObjectId userId){
+    public Borrowing endBorrowing(ObjectId bookId){
        Borrowing borrowing = borrowingRepository.findByBookIdAndStatus(bookId, Borrowing.BorrowingStatus.ONGOING);
         if(borrowing != null){
             borrowing.setStatus(Borrowing.BorrowingStatus.FINISHED);
