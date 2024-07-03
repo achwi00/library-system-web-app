@@ -84,6 +84,13 @@ ul button:hover{
     top:20%;
     padding: 7%;
 }
+.info-cont a{
+    color: black;
+}
+.info-cont a:hover{
+    color: var(--darkred);
+    text-decoration: underline;
+}
 .info-cont p{
     padding-right: 20%;
     font-size: 1.1rem;

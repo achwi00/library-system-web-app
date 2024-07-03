@@ -3,8 +3,7 @@ const urlParams1 = new URLSearchParams(window.location.search);
 const sessionKey = urlParams1.get('sessionKey');
 
 function general(){
-    if(document.cookie)
-    console.log("subsite: ", subsite);
+
     if(!subsite || subsite === "catalog") {
         subsite = "catalog"
         displayCatalog("catalog");
@@ -37,7 +36,7 @@ function displayReaders() {
     subsite = "readers";
     document.getElementById("add-new").addEventListener('click', add);
     const itemsContainer = document.getElementById("items-container");
-    clearContainer(itemsContainer);
+    //clearContainer(itemsContainer);
 
     fetch(`/panel/all-readers`)
         .then(response => response.json())
@@ -88,10 +87,8 @@ function displayReaders() {
                 arrow.addEventListener('click', userDetails);
 
                 function userDetails(){
-                    toDefaultView(); //--**
-                   //clearContainer(itemsContainer);
+                    toDefaultView();
                    const bookFormHolder = document.getElementById("bookFormHolder");
-                   //append the bookFormHolder
                    const addNew = document.getElementById("add-new");
                    addNew.removeEventListener('click', add);
                    const upperNew = document.getElementById("new-upper");
@@ -117,10 +114,9 @@ function displayReaders() {
                         .then(data => {
                             data.forEach(b => {
                             const booking = document.createElement('p');
-                            booking.style.margin = "0";
-                            console.log(`${b.startTime}`);
-                            booking.innerText = `${b.borrowing.startTime} ${b.book.author} ${b.book.bookCopyId}`;
-
+                            booking.style.marginTop = "0";
+                            booking.style.marginBottom = "0";
+                            booking.innerText = `${b.borrowing.startTime} ${b.book.author} : ${b.book.title}, CopyId: ${b.book.bookCopyId}`;
                             addNew.appendChild(booking);
                         })
                         })
@@ -293,7 +289,8 @@ function displayReaders() {
                 }
                 const arrowHolder = document.createElement('button');
                 arrowHolder.classList.add("more");
-                arrowHolder.classList.add("grow")
+                arrowHolder.style.height = "100%";
+                //arrowHolder.classList.add("grow")
                 const arrow = document.createElement('i');
                 arrow.classList.add("bi");
                 arrow.classList.add("bi-chevron-down");
@@ -507,6 +504,7 @@ function toDefaultView(){
     const upper = document.getElementById("new-upper");
     upper.style.height = "100%";
     clearContainer(upper);
+
     const bookFormHolder = document.getElementById("bookFormHolder");
     if(bookFormHolder != null) bookFormHolder.remove();
 
@@ -517,8 +515,10 @@ function toDefaultView(){
     upper.appendChild(pAddNew);
     upper.appendChild(more);
 
-    const readerName = document.querySelector("#add-new > p");
-    if(readerName){
-        readerName.remove();
+    const readerName = document.querySelectorAll("#add-new > p");
+    if(readerName[0]){
+        readerName.forEach(reader=>{
+            reader.remove();
+        })
     }
 }

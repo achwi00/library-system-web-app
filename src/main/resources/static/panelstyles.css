@@ -67,6 +67,9 @@ nav{
 #add-new h2{
     font-size: 1.2rem;
 }
+#add-new p{
+    margin-left: 2%;
+}
 .item{
     /*display: flex;
     flex-direction: row;
