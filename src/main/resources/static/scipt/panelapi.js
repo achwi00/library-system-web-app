@@ -95,6 +95,7 @@ function displayReaders() {
                    addNew.style.minHeight = "19vh";
                    upperNew.style.height = "30%";
                    clearContainer(upperNew);
+
                    const pName = document.createElement('h2');
                    pName.textContent = `${reader.name} ${reader.surname}, Library card: ${reader.cardNumber}`;
                    upperNew.appendChild(pName);
