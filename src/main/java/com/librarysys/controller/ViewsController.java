@@ -17,11 +17,6 @@ public class ViewsController
         return "loginpage.html";
     }
 
-    @RequestMapping("/test")
-    public String test(){
-        return "testpage.html";
-    }
-
     @RequestMapping("panel")
     public String panel(@RequestParam String sessionKey){
         return "panel.html";

@@ -36,7 +36,7 @@ function displayReaders() {
     subsite = "readers";
     document.getElementById("add-new").addEventListener('click', add);
     const itemsContainer = document.getElementById("items-container");
-    //clearContainer(itemsContainer);
+
 
     fetch(`/panel/all-readers`)
         .then(response => response.json())
@@ -88,7 +88,7 @@ function displayReaders() {
 
                 function userDetails(){
                     toDefaultView();
-                   const bookFormHolder = document.getElementById("bookFormHolder");
+                   //const bookFormHolder = document.getElementById("bookFormHolder");
                    const addNew = document.getElementById("add-new");
                    addNew.removeEventListener('click', add);
                    const upperNew = document.getElementById("new-upper");
