@@ -37,7 +37,6 @@ function displayReaders() {
     document.getElementById("add-new").addEventListener('click', add);
     const itemsContainer = document.getElementById("items-container");
 
-
     fetch(`/panel/all-readers`)
         .then(response => response.json())
         .then(data => {
@@ -146,7 +145,7 @@ function displayReaders() {
                                 const author = document.createElement('p');
                                 const bookCopy = document.createElement('p');
                                 time.innerText = `${entry.borrowing.startTime} - ${entry.borrowing.endTime}`;
-                                author.innerText = `${entry.book.author}`;
+                                author.innerText = `${entry.book.author} : ${entry.book.title}`;
                                 bookCopy.innerText = `${entry.book.bookCopyId}`;
                                 itemLeft.appendChild(time);
                                 itemLeft.appendChild(author);
@@ -223,18 +222,11 @@ function displayReaders() {
                         bookCopy.style.color = "var(--washedblack)";
                         const reservationForm = document.createElement('form');
                         reservationForm.classList.add("reservationForm");
-                        const cardNum = document.createElement('input');
-                        cardNum.classList.add("addInput");
-                        cardNum.placeholder = "Library card number";
-                        cardNum.type = "text";
-                        cardNum.required = true;
+
+                        const cardNum = createInput("text", ["addInput"], "Library card number", "cardNum", true);
                         cardNum.style.margin = "0";
-                        cardNum.name = "cardNum";
-                        const reservationBtn = document.createElement('input');
-                        reservationBtn.classList.add("operation-btn");
-                        reservationBtn.classList.add("grow");
-                        reservationBtn.type = "submit";
-                        reservationBtn.value = "Book";
+                        const reservationBtn = createInput("submit", ["operation-btn", "grow"], "Book", "", true);
+
                         reservationBtn.style.height = "3.5vh";
                         reservationBtn.style.width = "30%";
                         reservationForm.appendChild(cardNum);
@@ -290,7 +282,7 @@ function displayReaders() {
                 const arrowHolder = document.createElement('button');
                 arrowHolder.classList.add("more");
                 arrowHolder.style.height = "100%";
-                //arrowHolder.classList.add("grow")
+
                 const arrow = document.createElement('i');
                 arrow.classList.add("bi");
                 arrow.classList.add("bi-chevron-down");
@@ -383,29 +375,11 @@ function addBook(){
     addForms.id = "addBookForm";
     addForms.action = "/panel/add-book";
     addForms.method = "post";
-    const author = document.createElement('input');
-    author.type = "text";
-    author.required = true;
-    author.placeholder = "Enter author";
-    author.classList.add("addInput");
-    author.name = "author";
-    const title = document.createElement('input');
-    title.type = "text";
-    title.required = true;
-    title.placeholder = "Enter title";
-    title.classList.add("addInput");
-    title.name = "title";
-    const publisher = document.createElement('input');
-    publisher.type = "text";
-    publisher.required = true;
-    publisher.placeholder = "Enter publisher name";
-    publisher.classList.add("addInput");
-    publisher.name = "publisher";
-    const button = document.createElement('input');
-    button.type = "submit";
-    button.value = "Add";
-    button.classList.add("addInput")
-    button.classList.add("btn");
+
+    const author = createInput("text", ["addInput"], "Enter author", "author", true);
+    const title = createInput("text", ["addInput"], "Enter title", "title", true);
+    const publisher = createInput("text", ["addInput"], "Enter publisher name", "publisher", true);
+    const button = createInput("submit", ["addInput", "btn"], "Add", "", true);
     firstRow.appendChild(author);
     firstRow.appendChild(title);
     addForms.appendChild(firstRow);
@@ -442,29 +416,12 @@ function addUser(){
     addForms.id = "addUserForm";
     addForms.action = "/panel/add-user";
     addForms.method = "post";
-    const nameOfUser = document.createElement('input');
-    nameOfUser.type = "text";
-    nameOfUser.required = true;
-    nameOfUser.placeholder = "Enter name";
-    nameOfUser.classList.add("addInput");
-    nameOfUser.name = "name";
-    const surname = document.createElement('input');
-    surname.type = "text";
-    surname.required = true;
-    surname.placeholder = "Enter surname";
-    surname.classList.add("addInput");
-    surname.name = "surname";
-    const cardNum = document.createElement('input');
-    cardNum.type = "text";
-    cardNum.required = true;
-    cardNum.placeholder = "Enter user's library card";
-    cardNum.classList.add("addInput");
-    cardNum.name = "cardNum";
-    const button = document.createElement('input');
-    button.type = "submit";
-    button.value = "Add";
-    button.classList.add("addInput")
-    button.classList.add("btn");
+
+    const nameOfUser = createInput("text", ["addInput"], "Enter name", "name", true);
+    const surname = createInput("text", ["addInput"], "Enter surname", "surname", true);
+    const cardNum = createInput("text", ["addInput"], "Enter user's library card","cardNum", true);
+    const button = createInput("submit", ["addInput", "btn"], "Add","", true);
+
     firstRow.appendChild(nameOfUser);
     firstRow.appendChild(surname);
     addForms.appendChild(firstRow);
@@ -521,4 +478,25 @@ function toDefaultView(){
             reader.remove();
         })
     }
+}
+function createInput(inputType, classlist ={}, inner, name, isRequired){
+    console.log("In createInput");
+    const element = document.createElement('input');
+    element.type = inputType;
+
+    if(isRequired && inputType === "text"){
+        element.required = true;
+        element.name = name;
+    }
+    if(inputType === "text"){
+        element.placeholder = inner;
+    }
+    else if(inputType === "submit"){
+        element.value = inner;
+    }
+    classlist.forEach(c =>{
+        element.classList.add(c);
+    })
+
+    return element;
 }
