@@ -7,10 +7,13 @@
 
 ## General info
 
-Library system web application created as a recruitment task at Kinguin.
-The task's requirements were : CRUD operations for books and customers and an endpoint to record whether the 
-book has been borrowed.
-The requirements are met and there have been more functionalities added.
+Library system web application.
+
+Core functionalities:
+* log-in 
+* adding new customers and books
+* checking if a book is currently borrowed or free
+
 
 ## Running
 
